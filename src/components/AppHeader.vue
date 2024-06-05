@@ -14,7 +14,7 @@ export default {
 <template>
   <header>
     <input type="text" v-model="store.inputSearch" />
-    <button @click="search">Search</button>
+    <button @click="$emit('search')">Search</button>
   </header>
 </template>
 

@@ -16,7 +16,18 @@ export default {
 </script>
 
 <template>
-  <main></main>
+  <main>
+    <ul>
+      <li v-for="item in store.results">
+        <ul>
+          <li>{{ item.title }}</li>
+          <li>{{ item.original_title }}</li>
+          <li>{{ item.original_language }}</li>
+          <li>{{ item.vote_average }}</li>
+        </ul>
+      </li>
+    </ul>
+  </main>
 </template>
 
 <style scoped></style>
