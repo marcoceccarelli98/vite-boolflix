@@ -18,10 +18,25 @@ export default {
 <template>
   <main>
     <ul>
-      <li v-for="item in store.results">
+      <!-- MOVIES -->
+      <li v-for="item in store.movies">
         <ul>
           <li>{{ item.title }}</li>
           <li>{{ item.original_title }}</li>
+          <li>
+            <img
+              :src="'/public/flags/' + item.original_language + '.svg'"
+              :alt="item.original_language"
+            />
+          </li>
+          <li>{{ item.vote_average }}</li>
+        </ul>
+      </li>
+      <!-- SERIES -->
+      <li v-for="item in store.series">
+        <ul>
+          <li>{{ item.name }}</li>
+          <li>{{ item.original_name }}</li>
           <li>
             <img
               :src="'/public/flags/' + item.original_language + '.svg'"

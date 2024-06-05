@@ -6,8 +6,10 @@ export const store = reactive({
   apiKey: "?api_key=b875ad765049fffffbab8ac9601a041f",
   apiSearch: "/search",
   apiMovie: "/movie",
+  apiTv: "/tv",
   apiQuery: "&query=",
   inputSearch: "",
 
-  results: [],
+  movies: [],
+  series: [],
 });

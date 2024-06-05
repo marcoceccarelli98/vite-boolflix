@@ -14,28 +14,47 @@ export default {
     };
   },
   methods: {
-    getData(response) {
-      store.results = response.data.results;
-      store.loading = false;
+    getMovies(response) {
+      store.movies = response.data.results;
+      console.log(response.data.results);
+    },
+    getSeries(response) {
+      store.series = response.data.results;
       console.log(response.data.results);
     },
 
-    apiCall() {
-      store.loading = true;
+    apiSearchMovie() {
       axios
         .get(store.apiUrl + store.apiSearch + store.apiMovie + store.apiKey, {
           params: {
             query: store.inputSearch,
           },
         })
-        .then((response) => this.getData(response));
+        .then((response) => this.getMovies(response));
+    },
+
+    apiSearchSeries() {
+      axios
+        .get(store.apiUrl + store.apiSearch + store.apiTv + store.apiKey, {
+          params: {
+            query: store.inputSearch,
+          },
+        })
+        .then((response) => this.getSeries(response));
+    },
+
+    searchItems() {
+      store.loading = true;
+      this.apiSearchMovie();
+      this.apiSearchSeries();
+      store.loading = false;
     },
   },
 };
 </script>
 
 <template>
-  <AppHeader @search="apiCall" />
+  <AppHeader @search="searchItems" />
   <AppMain />
 </template>
 
