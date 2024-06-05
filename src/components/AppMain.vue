@@ -22,7 +22,12 @@ export default {
         <ul>
           <li>{{ item.title }}</li>
           <li>{{ item.original_title }}</li>
-          <li>{{ item.original_language }}</li>
+          <li>
+            <img
+              :src="'/public/flags/' + item.original_language + '.svg'"
+              :alt="item.original_language"
+            />
+          </li>
           <li>{{ item.vote_average }}</li>
         </ul>
       </li>
@@ -30,4 +35,8 @@ export default {
   </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+img {
+  width: 30px;
+}
+</style>
