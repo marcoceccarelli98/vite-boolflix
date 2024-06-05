@@ -4,9 +4,13 @@
   box-sizing: border-box;
 }
 
-img {
-  display: block;
+[v-cloak] {
+  display: none;
 }
+
+// img {
+//   display: block;
+// }
 
 ul {
   list-style: none;

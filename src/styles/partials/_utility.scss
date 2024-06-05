@@ -1,0 +1,51 @@
+// ------------------
+//      DISPLAY
+// ------------------
+
+.flex {
+  display: flex;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+// ------------------
+//      JUSTIFY
+// ------------------
+
+.j-between {
+  justify-content: space-between;
+}
+
+.j-center {
+  justify-content: center;
+}
+
+// ------------------
+//      JUSTIFY
+// ------------------
+
+.align-center {
+  align-items: center;
+}
+
+// ------------------
+//       WRAP
+// ------------------
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+// ------------------
+//        GAP
+// ------------------
+
+.g-15 {
+  gap: 15px;
+}
+
+// ------------------
+//       MARGIN
+// ------------------
