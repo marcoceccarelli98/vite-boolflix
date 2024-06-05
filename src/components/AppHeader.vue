@@ -1,11 +1,21 @@
 <script>
+import { store } from "../data/store.js";
 export default {
   name: "AppHeader",
+  emits: ["search"],
+  data() {
+    return {
+      store,
+    };
+  },
 };
 </script>
 
 <template>
-  <header></header>
+  <header>
+    <input type="text" v-model="store.inputSearch" />
+    <button @click="search">Search</button>
+  </header>
 </template>
 
 <style scoped></style>
