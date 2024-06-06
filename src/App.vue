@@ -25,8 +25,9 @@ export default {
 
     apiSearchMovie() {
       axios
-        .get(store.apiUrl + store.apiSearch + store.apiMovie + store.apiKey, {
+        .get(store.apiUrl + store.apiSearchMovie, {
           params: {
+            api_key: store.apiKey,
             query: store.inputSearch,
           },
         })
@@ -35,8 +36,9 @@ export default {
 
     apiSearchSeries() {
       axios
-        .get(store.apiUrl + store.apiSearch + store.apiTv + store.apiKey, {
+        .get(store.apiUrl + store.apiSearchSeries, {
           params: {
+            api_key: store.apiKey,
             query: store.inputSearch,
           },
         })

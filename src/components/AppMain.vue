@@ -1,6 +1,7 @@
 <script>
 import { store } from "../data/store.js";
 import MovieList from "./MovieList.vue";
+import SeriesList from "./SeriesList.vue";
 export default {
   name: "AppMain",
   components: {
@@ -27,6 +28,7 @@ export default {
       <!-- ------------------ -->
       <!-- ----- SERIES ----- -->
       <!-- ------------------ -->
+      <SeriesList :series="store.series" />
     </div>
   </main>
 </template>
