@@ -22,10 +22,18 @@ export default {
       type: Number,
       required: true,
     },
+    cast: {
+      type: Array,
+      required: false,
+    },
   },
   methods: {
+    //Convert the float vote from 0 to 10 to an int vote from 0 to 5 for the star rappresentation
     fromVoteToStars(vote) {
       return Math.round(vote / 2);
+    },
+    logTest() {
+      console.log(this.cast);
     },
   },
   computed: {},
@@ -33,23 +41,25 @@ export default {
 </script>
 
 <template>
-  <!-- POSTER -->
-
   <div class="card-container">
+    <!-- POSTER -->
     <img
       class="poster-image"
       :src="'https://image.tmdb.org/t/p/w342' + poster"
       :alt="title + ' poster'"
     />
+    <!-- DETAILS -->
     <ul class="details">
       <!-- TITLE -->
-      <li>{{ "Title: " + title }}</li>
+      <li>
+        <h3 class="mb-10">{{ "Title: " + title }}</h3>
+      </li>
       <!-- ORIGINAL TITLE -->
       <li v-if="title != originalTitle">
-        {{ "Original Title: " + originalTitle }}
+        <h4 class="mb-15">{{ "Original Title: " + originalTitle }}</h4>
       </li>
       <!-- LANGUAGE -->
-      <li class="flex align-center">
+      <li class="mb-15 flex align-center">
         <span>Language:</span>
         <img
           :src="'/public/flags/' + language + '.svg'"
@@ -65,6 +75,15 @@ export default {
           v-for="n in 5 - fromVoteToStars(vote)"
         ></i>
       </li>
+      <!-- DEBUG -->
+      <button @click="logTest"></button>
+      <!-- CAST -->
+      <li>
+        <ul>
+          Cast:
+          <li v-for="actor in cast">{{ cast.actor }}</li>
+        </ul>
+      </li>
     </ul>
   </div>
 </template>
@@ -78,20 +97,29 @@ export default {
   color: white;
 }
 
+.poster-image {
+  width: 342px;
+  height: 512px;
+}
+// TEXT DETAILS
 .details {
+  color: white;
+  padding: 30px;
   display: none;
 }
 
+// Language Flag
+.flag {
+  width: 30px;
+  margin-left: 10px;
+}
+
+// HOVER EFFECT
 .card-container:hover img.poster-image {
   display: none;
 }
 
 .card-container:hover .details {
   display: inline-block;
-}
-
-.flag {
-  width: 30px;
-  margin-left: 10px;
 }
 </style>
