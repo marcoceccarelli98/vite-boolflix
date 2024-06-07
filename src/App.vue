@@ -14,6 +14,10 @@ export default {
     };
   },
   methods: {
+    testLog() {
+      console.log(store.movies);
+    },
+
     // ------------
     //  ASSIGNMENT
     // ------------
@@ -63,11 +67,33 @@ export default {
         });
     },
 
+    apiGetActors(movie, index) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=b875ad765049fffffbab8ac9601a041f`
+        )
+        .then((response) => {
+          // console.log(this.cast);
+          store.movies[index].cast = response.data.cast;
+          console.log(response.data.cast);
+        })
+        .catch((error) => {
+          console.log("Search Actors ERROR");
+        });
+    },
+
     searchItems() {
       store.loading = true;
+      // GET MOVIES
       this.apiSearchMovie();
+      // GET SERIES
       this.apiSearchSeries();
-      // this.apiGetActors();
+
+      // GET ACTORS
+      store.movies.forEach((movie, index) => {
+        //console.log(movie.id);
+        this.apiGetActors(movie, index);
+      });
       store.loading = false;
     },
     // }
@@ -76,7 +102,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @search="searchItems" />
+  <AppHeader @test="testLog()" @search="searchItems" />
   <AppMain />
 </template>
 

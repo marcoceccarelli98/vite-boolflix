@@ -2,7 +2,7 @@
 import { store } from "../data/store.js";
 export default {
   name: "AppHeader",
-  emits: ["search"],
+  emits: ["search", "test"],
   data() {
     return {
       store,
@@ -16,6 +16,10 @@ export default {
     <div class="container flex j-between">
       <div class="logo">
         <span>BOOLFLIX</span>
+      </div>
+      <!-- TEST -->
+      <div>
+        <button @click="$emit('test')">TEST</button>
       </div>
       <div class="research">
         <input
