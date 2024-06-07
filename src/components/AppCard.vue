@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 export default {
   name: "AppCard",
   props: {
@@ -75,14 +74,15 @@ export default {
         ></i>
       </li>
       <!-- CAST -->
-      <li v-if="credits.cast != undefined">
-        <ul v-if="credits.cast.length">
+      <li v-if="credits">
+        <ul>
           Cast:
           <li v-for="actor in credits.cast.slice(0, 5)">
             {{ actor.name }}
           </li>
         </ul>
       </li>
+      <li v-else>Caricamento...</li>
     </ul>
   </div>
 </template>

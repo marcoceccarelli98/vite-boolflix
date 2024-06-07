@@ -27,7 +27,7 @@ export default {
       // GET MOVIES
       this.apiSearchMovie();
       // GET SERIES
-      //this.apiSearchSeries();
+      this.apiSearchSeries();
     },
 
     apiSearchMovie() {

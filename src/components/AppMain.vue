@@ -25,11 +25,13 @@ export default {
       <!-- ------------------ -->
       <!-- ----- MOVIES ----- -->
       <!-- ------------------ -->
+      <h2>MOVIES</h2>
       <MovieList v-if="!store.loading" :movies="store.movies" />
       <!-- ------------------ -->
       <!-- ----- SERIES ----- -->
       <!-- ------------------ -->
-      <!-- <SeriesList :series="store.series" /> -->
+      <h2>SERIES</h2>
+      <SeriesList v-if="!store.loading" :series="store.series" />
     </div>
   </main>
 </template>
