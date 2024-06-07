@@ -23,8 +23,8 @@ export default {
       type: Number,
       required: true,
     },
-    cast: {
-      type: Array,
+    credits: {
+      type: Object,
       required: false,
     },
   },
@@ -75,10 +75,10 @@ export default {
         ></i>
       </li>
       <!-- CAST -->
-      <li v-if="cast != undefined">
-        <ul v-if="cast.length">
+      <li v-if="credits.cast != undefined">
+        <ul v-if="credits.cast.length">
           Cast:
-          <li v-for="actor in cast.slice(0, 5)">
+          <li v-for="actor in credits.cast.slice(0, 5)">
             {{ actor.name }}
           </li>
         </ul>

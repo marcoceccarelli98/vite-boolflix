@@ -16,28 +16,22 @@ export default {
 
   methods: {
     testLog() {
+      console.log(store.movies);
       console.log(store.series);
-    },
-
-    // ------------
-    //  ASSIGNMENT
-    // ------------
-    getMovies(response) {
-      store.movies = response.data.results;
-      //console.log(store.movies);
-    },
-    getSeries(response) {
-      //console.log(response.data.results);
-    },
-    getMoviesActors(response) {
-      store.movies.cast = response.data.cast;
-      console.log(store.movies.cast);
     },
 
     // --------
     //  SEARCH
     // --------
+    searchItems() {
+      // GET MOVIES
+      this.apiSearchMovie();
+      // GET SERIES
+      //this.apiSearchSeries();
+    },
+
     apiSearchMovie() {
+      store.loading = true;
       axios
         .get(store.apiUrl + store.apiSearchMovie, {
           params: {
@@ -49,8 +43,9 @@ export default {
           store.movies = response.data.results;
           // IMPORTANT!!! Using apiGetActors after received the movie data from apiSearchMovie
           store.movies.forEach((movie, index) => {
-            this.apiGetActors(movie, index);
+            this.apiGetInfo(movie, index);
           });
+          store.loading = false;
         })
         .catch((error) => {
           console.log("Search Movie ERROR : ", error);
@@ -67,43 +62,51 @@ export default {
         })
         .then((response) => {
           store.series = response.data.results;
-          console.log(response.data.results);
+          // IMPORTANT!!! Using apiGetActors after received the movie data from apiSearchMovie
+          store.series.forEach((serie, index) => {
+            this.apiGetInfo(serie, index);
+          });
+          store.loading = false;
         })
         .catch((error) => {
           console.log("Search Series ERROR : ", error);
         });
     },
 
-    // WORKING WITH DOUBLE CLICK SEARCH
+    apiGetInfo(obj, index) {
+      let searchType = "/tv/";
+      //Check if the obj passed from a search contain title or not to determinate if is a movie or a series
+      if ("title" in obj) {
+        searchType = "/movie/";
+        console.log(searchType);
+      }
 
-    apiGetActors(movie, index) {
-      store.movies.forEach((movie, index) => {
-        axios
-          .get(
-            `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=b875ad765049fffffbab8ac9601a041f`
-          )
-          .then((response) => {
-            store.movies[index].cast = response.data.cast;
-            console.log(response.data.cast);
-          })
-          .catch((error) => {
-            console.log("Search Actors ERROR : ", error);
-          });
-      });
+      //API CALL with auto determination of movie or series
+      axios
+        .get(
+          `https://api.themoviedb.org/3${searchType}${obj.id}?api_key=b875ad765049fffffbab8ac9601a041f`,
+          {
+            params: {
+              //Add to detail call, the credits to get the cast of the film id
+              append_to_response: "credits",
+            },
+          }
+        )
+        .then((response) => {
+          //Check if movie or series and put the response of the call in the right place
+          if ("title" in obj) {
+            store.movies[index] = response.data;
+          } else {
+            store.series[index] = response.data;
+          }
+          //console.log(response.data);
+          //store.loading = false;
+        })
+        .catch((error) => {
+          console.log("Search Actors ERROR : ", error);
+        });
     },
 
-    searchItems() {
-      // Set loading mem true at the start of the research
-      store.loading = true;
-
-      // GET MOVIES
-      this.apiSearchMovie();
-      // GET SERIES
-      this.apiSearchSeries();
-
-      // Set loading mem false at the end of the research
-      store.loading = false;
-    },
     // }
   },
 };

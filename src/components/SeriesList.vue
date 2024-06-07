@@ -22,7 +22,8 @@ export default {
       :originalTitle="serie.original_name"
       :language="serie.original_language"
       :vote="serie.vote_average"
-      :cast="serie.cast"
+      :credits="serie.credits"
+      :genres="serie.genres"
     />
   </div>
 </template>

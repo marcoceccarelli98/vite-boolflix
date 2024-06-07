@@ -6,6 +6,7 @@ export default {
   name: "AppMain",
   components: {
     MovieList,
+    SeriesList,
   },
 
   data() {
@@ -24,11 +25,11 @@ export default {
       <!-- ------------------ -->
       <!-- ----- MOVIES ----- -->
       <!-- ------------------ -->
-      <!-- <MovieList :movies="store.movies" /> -->
+      <MovieList v-if="!store.loading" :movies="store.movies" />
       <!-- ------------------ -->
       <!-- ----- SERIES ----- -->
       <!-- ------------------ -->
-      <SeriesList :series="store.series" />
+      <!-- <SeriesList :series="store.series" /> -->
     </div>
   </main>
 </template>

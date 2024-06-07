@@ -7,7 +7,8 @@ export const store = reactive({
   apiKey: "b875ad765049fffffbab8ac9601a041f",
   apiSearchMovie: "/search/movie",
   apiSearchSeries: "/search/tv",
-  apiSearchActors: "credits",
+  apiInfoMovie: "/movie/",
+  apiInfoSeries: "/tv/",
 
   // INPUTS
   inputSearch: "",
@@ -15,5 +16,4 @@ export const store = reactive({
   // DATA
   movies: [],
   series: [],
-  genre_ids: [],
 });
