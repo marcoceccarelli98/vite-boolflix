@@ -24,7 +24,7 @@ export default {
       <!-- ------------------ -->
       <!-- ----- MOVIES ----- -->
       <!-- ------------------ -->
-      <MovieList :movies="store.movies" />
+      <!-- <MovieList :movies="store.movies" /> -->
       <!-- ------------------ -->
       <!-- ----- SERIES ----- -->
       <!-- ------------------ -->

@@ -9,8 +9,6 @@ export const store = reactive({
   apiSearchSeries: "/search/tv",
   apiSearchActors: "credits",
 
-  apiError: "",
-
   // INPUTS
   inputSearch: "",
 
