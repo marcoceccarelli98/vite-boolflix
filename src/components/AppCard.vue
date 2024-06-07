@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 export default {
   name: "AppCard",
   props: {
@@ -22,21 +23,47 @@ export default {
       type: Number,
       required: true,
     },
-    cast: {
-      type: Array,
+    id: {
+      type: Number,
       required: false,
     },
   },
+
+  created() {
+    this.getActors();
+  },
+
+  // DATA
+  data() {
+    return {
+      cast: [],
+    };
+  },
+
+  // METHODS
   methods: {
     //Convert the float vote from 0 to 10 to an int vote from 0 to 5 for the star rappresentation
     fromVoteToStars(vote) {
       return Math.round(vote / 2);
     },
-    logTest() {
-      console.log(this.cast);
+    apiGetActors() {
+      return axios
+        .get(
+          `https://api.themoviedb.org/3/movie/${this.id}/credits?api_key=b875ad765049fffffbab8ac9601a041f`
+        )
+        .then((response) => {
+          console.log(this.cast);
+          this.cast = response.data.cast;
+          console.log(response.data.cast);
+        })
+        .catch((error) => {
+          console.log("Search Actors ERROR");
+        });
+    },
+    getActors() {
+      this.apiGetActors();
     },
   },
-  computed: {},
 };
 </script>
 
@@ -75,13 +102,13 @@ export default {
           v-for="n in 5 - fromVoteToStars(vote)"
         ></i>
       </li>
-      <!-- DEBUG -->
-      <button @click="logTest"></button>
       <!-- CAST -->
-      <li>
+      <li v-if="cast.length">
         <ul>
           Cast:
-          <li v-for="actor in cast">{{ cast.actor }}</li>
+          <li v-for="actor in cast.slice(0, 5)">
+            {{ actor.name }}
+          </li>
         </ul>
       </li>
     </ul>

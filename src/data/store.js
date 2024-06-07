@@ -9,12 +9,13 @@ export const store = reactive({
   apiSearchSeries: "/search/tv",
   apiSearchActors: "credits",
 
+  apiError: "",
+
   // INPUTS
   inputSearch: "",
 
   // DATA
   movies: [],
-  moviesActors: [],
   series: [],
   genre_ids: [],
 });

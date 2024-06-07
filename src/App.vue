@@ -27,7 +27,9 @@ export default {
     },
     getMoviesActors(response) {
       store.movies.cast = response.data.cast;
+      console.log(store.movies.cast);
     },
+
     // --------
     //  SEARCH
     // --------
@@ -37,10 +39,13 @@ export default {
           params: {
             api_key: store.apiKey,
             query: store.inputSearch,
-            append_to_response: store.apiSearchActors,
           },
         })
-        .then((response) => this.getMovies(response));
+        .then((response) => this.getMovies(response))
+        .catch((error) => {
+          console.log("Search Movie ERROR");
+          store.apiError = error;
+        });
     },
 
     apiSearchSeries() {
@@ -51,38 +56,18 @@ export default {
             query: store.inputSearch,
           },
         })
-        .then((response) => this.getSeries(response));
+        .then((response) => this.getSeries(response))
+        .catch((error) => {
+          console.log("Search Series ERROR");
+          store.apiError = error;
+        });
     },
 
-    apiGetActors() {
-      console.log(store.movies.id);
-      store.movies.forEach((movie, index) => {
-        //console.log(movie);
-        // axios.get(store.apiUrl +"/movie/" + movie[index].id + "/credits").then((response) => this.getSeries(response));
-        axios
-          .get(
-            `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${store.apiKey}`
-          )
-          .then((response) => this.getMoviesActors(response));
-        // {
-        //   const cast = response.data.cast;
-        //   const crew = response.data.crew;
-
-        //   //console.log(response);
-        //   movie.cast = cast;
-        //   movie.crew = crew;
-        //   console.log(movie);
-
-        //   //store.moviesActors[index] = response;
-        //   console.log(response);
-        // }
-      });
-    },
     searchItems() {
       store.loading = true;
       this.apiSearchMovie();
       this.apiSearchSeries();
-      this.apiGetActors();
+      // this.apiGetActors();
       store.loading = false;
     },
     // }
