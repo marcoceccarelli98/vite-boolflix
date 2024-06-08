@@ -31,7 +31,6 @@ export default {
     },
 
     apiSearchMovie() {
-      store.loading = true;
       axios
         .get(store.apiUrl + store.apiSearchMovie, {
           params: {
@@ -45,7 +44,6 @@ export default {
           store.movies.forEach((movie, index) => {
             this.apiGetInfo(movie, index);
           });
-          store.loading = false;
         })
         .catch((error) => {
           console.log("Search Movie ERROR : ", error);
@@ -66,7 +64,6 @@ export default {
           store.series.forEach((serie, index) => {
             this.apiGetInfo(serie, index);
           });
-          store.loading = false;
         })
         .catch((error) => {
           console.log("Search Series ERROR : ", error);

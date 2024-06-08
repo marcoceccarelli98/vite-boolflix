@@ -1,6 +1,10 @@
 import { reactive } from "vue";
 
 export const store = reactive({
+  // DEBUG
+  // debug: true,//turn on debug mode
+  debug: false, //turn off debug mode
+
   // API
   loading: false,
   apiUrl: "https://api.themoviedb.org/3",
@@ -16,4 +20,16 @@ export const store = reactive({
   // DATA
   movies: [],
   series: [],
+
+  //HUD
+  menu: [
+    {
+      name: "Movies",
+      isActive: false,
+    },
+    {
+      name: "Series",
+      isActive: false,
+    },
+  ],
 });
