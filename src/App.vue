@@ -75,7 +75,6 @@ export default {
       //Check if the obj passed from a search contain title or not to determinate if is a movie or a series
       if ("title" in obj) {
         searchType = "/movie/";
-        console.log(searchType);
       }
 
       //API CALL with auto determination of movie or series

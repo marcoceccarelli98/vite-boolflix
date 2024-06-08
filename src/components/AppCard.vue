@@ -30,6 +30,10 @@ export default {
       type: Object,
       required: false,
     },
+    genres: {
+      type: Array,
+      required: false,
+    },
   },
 
   // METHODS
@@ -51,10 +55,12 @@ export default {
       <li>
         <h3 class="mb-10">{{ "Title: " + title }}</h3>
       </li>
+      <!-- /TITLE -->
       <!-- ORIGINAL TITLE -->
       <li v-if="title != originalTitle">
         <h4 class="mb-15">{{ "Original Title: " + originalTitle }}</h4>
       </li>
+      <!-- /ORIGINAL TITLE -->
       <!-- LANGUAGE -->
       <li class="mb-15 flex align-center">
         <span>Language:</span>
@@ -64,10 +70,12 @@ export default {
           class="flag inline-block"
         />
       </li>
+      <!-- /LANGUAGE -->
       <!-- VOTE -->
-      <li><StarsVote :vote="vote" /></li>
+      <li class="mb-15"><StarsVote :vote="vote" /></li>
+      <!-- /VOTE -->
       <!-- CAST -->
-      <li v-if="credits">
+      <li class="text-list mb-15" v-if="credits">
         <ul>
           Cast:
           <li v-for="actor in credits.cast.slice(0, 5)">
@@ -75,7 +83,19 @@ export default {
           </li>
         </ul>
       </li>
-      <li v-else>Caricamento...</li>
+      <li v-else>Loading...</li>
+      <!-- /CAST -->
+      <!-- GENRES -->
+      <li class="text-list mb-15" v-if="genres">
+        <ul>
+          Genres:
+          <li v-for="genre in genres">
+            {{ genre.name }}
+          </li>
+        </ul>
+      </li>
+      <li v-else>Loading...</li>
+      <!-- /GENRES -->
     </ul>
   </div>
 </template>
@@ -98,6 +118,14 @@ export default {
   color: white;
   padding: 30px;
   display: none;
+}
+
+.details .text-list {
+  line-height: 20px;
+}
+
+.details .text-list li:first-of-type {
+  margin-top: 5px;
 }
 
 // Language Flag
