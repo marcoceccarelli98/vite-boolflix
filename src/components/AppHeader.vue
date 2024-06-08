@@ -44,7 +44,11 @@ export default {
           <button @click="$emit('test')">TEST</button>
         </div>
       </div>
+      <!-- RESEARCH -->
       <div class="research">
+        <div class="filter">
+          <i class="fas fa-filter"></i>
+        </div>
         <input
           @keyup.enter="$emit('search')"
           type="text"
@@ -105,6 +109,12 @@ nav a {
 .research {
   display: flex;
   align-items: center;
+}
+
+.filter {
+  color: white;
+  font-size: 20px;
+  margin-right: 10px;
 }
 
 input {
