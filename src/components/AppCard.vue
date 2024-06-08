@@ -76,25 +76,23 @@ export default {
       <!-- /VOTE -->
       <!-- CAST -->
       <li class="text-list mb-15" v-if="credits">
-        <ul>
+        <ul v-show="credits.length > 0">
           Cast:
           <li v-for="actor in credits.cast.slice(0, 5)">
             {{ actor.name }}
           </li>
         </ul>
       </li>
-      <li v-else>Loading...</li>
       <!-- /CAST -->
       <!-- GENRES -->
       <li class="text-list mb-15" v-if="genres">
-        <ul>
+        <ul v-show="genres.length > 0">
           Genres:
           <li v-for="genre in genres">
             {{ genre.name }}
           </li>
         </ul>
       </li>
-      <li v-else>Loading...</li>
       <!-- /GENRES -->
     </ul>
   </div>
