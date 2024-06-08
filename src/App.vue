@@ -19,7 +19,23 @@ export default {
       console.log(store.movies);
       console.log(store.series);
     },
-
+    // ------------
+    //  GET GENRES
+    // ------------
+    getGenres() {
+      axios
+        .get("https://api.themoviedb.org/3/genre/movie/list", {
+          params: {
+            api_key: store.apiKey,
+          },
+        })
+        .then((response) => {
+          store.genres = response;
+        })
+        .catch((error) => {
+          console.log("Get Genres ERROR : ", error);
+        });
+    },
     // --------
     //  SEARCH
     // --------

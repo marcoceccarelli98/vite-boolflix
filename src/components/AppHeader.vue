@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       store,
+      showFilter: false,
     };
   },
 
@@ -19,12 +20,15 @@ export default {
         }
       });
     },
+    toggleFilter() {
+      this.showFilter = !this.showFilter;
+    },
   },
 };
 </script>
 
 <template>
-  <header>
+  <header :class="{ showFilter: this.showFilter }">
     <div class="container flex j-between">
       <div class="left-content">
         <div class="logo">
@@ -46,16 +50,24 @@ export default {
       </div>
       <!-- RESEARCH -->
       <div class="research">
-        <div class="filter">
+        <!-- FILTER BUTTON -->
+        <a @click.prevent="toggleFilter()" class="filter-icon">
           <i class="fas fa-filter"></i>
-        </div>
+        </a>
+        <!-- INPUT -->
         <input
           @keyup.enter="$emit('search')"
           type="text"
           v-model="store.inputSearch"
         />
+        <!-- SEARCH BUTTON -->
         <button @click="$emit('search')">Search</button>
       </div>
+    </div>
+    <div v-show="this.showFilter" class="filter-container">
+      <select name="genreFilter">
+        <option v-for="genre in genres" value="">{{ genre.name }}</option>
+      </select>
     </div>
   </header>
 </template>
@@ -65,11 +77,15 @@ header {
   position: fixed;
   left: 0;
   right: 0;
-  display: flex;
-  align-items: center;
+  padding-top: 15px;
   justify-content: space-between;
   background-color: black;
   height: 80px;
+}
+
+header.showFilter {
+  display: block;
+  height: 200px;
 }
 
 .left-content {
@@ -111,7 +127,7 @@ nav a {
   align-items: center;
 }
 
-.filter {
+.filter-icon {
   color: white;
   font-size: 20px;
   margin-right: 10px;
@@ -126,5 +142,11 @@ input {
 button {
   /* height: 25px; */
   padding: 5px 5px;
+}
+
+/* ------------ */
+/*    FILTER    */
+/* ------------ */
+.filter-container {
 }
 </style>
