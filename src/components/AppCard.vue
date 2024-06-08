@@ -1,6 +1,10 @@
 <script>
+import StarsVote from "./StarsVote.vue";
 export default {
   name: "AppCard",
+  components: {
+    StarsVote,
+  },
   props: {
     poster: {
       type: String,
@@ -29,12 +33,7 @@ export default {
   },
 
   // METHODS
-  methods: {
-    //Convert the float vote from 0 to 10 to an int vote from 0 to 5 for the star rappresentation
-    fromVoteToStars(vote) {
-      return Math.round(vote / 2);
-    },
-  },
+  methods: {},
 };
 </script>
 
@@ -66,13 +65,7 @@ export default {
         />
       </li>
       <!-- VOTE -->
-      <li>
-        <i class="fas fa-star" v-for="n in fromVoteToStars(vote)"></i>
-        <i
-          class="fa-regular fa-star"
-          v-for="n in 5 - fromVoteToStars(vote)"
-        ></i>
-      </li>
+      <li><StarsVote :vote="vote" /></li>
       <!-- CAST -->
       <li v-if="credits">
         <ul>

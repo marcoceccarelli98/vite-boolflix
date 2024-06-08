@@ -44,4 +44,8 @@ export default {
 main {
   padding-top: 80px;
 }
+
+.item-list {
+  margin-top: 15px;
+}
 </style>

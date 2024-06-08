@@ -25,7 +25,7 @@ export const store = reactive({
   menu: [
     {
       name: "Movies",
-      isActive: false,
+      isActive: true,
     },
     {
       name: "Series",
