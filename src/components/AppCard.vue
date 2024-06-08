@@ -105,6 +105,7 @@ export default {
   border: 1px solid white;
   background-color: black;
   color: white;
+  overflow-y: hidden;
 }
 
 .poster-image {

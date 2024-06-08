@@ -26,14 +26,12 @@ export default {
       <!-- ----- MOVIES ----- -->
       <!-- ------------------ -->
       <div class="items-list" v-show="store.menu[0].isActive">
-        <h2>MOVIES</h2>
         <MovieList :movies="store.movies" />
       </div>
       <!-- ------------------ -->
       <!-- ----- SERIES ----- -->
       <!-- ------------------ -->
       <div class="items-list" v-show="store.menu[1].isActive">
-        <h2>SERIES</h2>
         <SeriesList :series="store.series" />
       </div>
     </div>
@@ -43,9 +41,5 @@ export default {
 <style scoped>
 main {
   padding-top: 80px;
-}
-
-.item-list {
-  margin-top: 15px;
 }
 </style>
