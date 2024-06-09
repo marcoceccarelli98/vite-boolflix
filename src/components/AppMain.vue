@@ -14,6 +14,8 @@ export default {
       store,
     };
   },
+  methods: {},
+  computed: {},
 
   created() {},
 };
@@ -21,18 +23,19 @@ export default {
 
 <template>
   <main>
-    <div class="container">
+    <div v-if="!store.loading" class="container">
       <!-- ------------------ -->
       <!-- ----- MOVIES ----- -->
       <!-- ------------------ -->
+
       <div class="items-list" v-show="store.menu[0].isActive">
-        <MovieList :movies="store.movies" />
+        <MovieList :movies="store.filtMovies" />
       </div>
       <!-- ------------------ -->
       <!-- ----- SERIES ----- -->
       <!-- ------------------ -->
       <div class="items-list" v-show="store.menu[1].isActive">
-        <SeriesList :series="store.series" />
+        <SeriesList :series="store.filtSeries" />
       </div>
     </div>
   </main>
@@ -40,6 +43,6 @@ export default {
 
 <style scoped>
 main {
-  padding-top: 80px;
+  padding-top: 10px;
 }
 </style>

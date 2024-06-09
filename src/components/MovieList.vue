@@ -10,6 +10,11 @@ export default {
       type: Array,
     },
   },
+  methods: {},
+
+  // created() {
+  //   checkFilter();
+  // },
 };
 </script>
 

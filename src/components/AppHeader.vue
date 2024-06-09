@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       store,
-      showFilter: false,
+      showFilter: true,
     };
   },
 
@@ -22,6 +22,14 @@ export default {
     },
     toggleFilter() {
       this.showFilter = !this.showFilter;
+    },
+
+    checkUseFilter() {
+      if (store.filters.genre.filterId != 0) {
+        store.filters.filterOn = true;
+      } else {
+        store.filters.filterOn = false;
+      }
     },
   },
 };
@@ -64,9 +72,17 @@ export default {
         <button @click="$emit('search')">Search</button>
       </div>
     </div>
+    <!-- FILTER -->
     <div v-show="this.showFilter" class="filter-container">
-      <select name="genreFilter">
-        <option v-for="genre in genres" value="">{{ genre.name }}</option>
+      <select
+        @change="checkUseFilter"
+        v-model="store.filters.genre.filterId"
+        name="genreFilter"
+      >
+        <option value="0">None</option>
+        <option v-for="genre in store.genres" :value="genre.id">
+          {{ genre.name }}
+        </option>
       </select>
     </div>
   </header>
@@ -74,7 +90,7 @@ export default {
 
 <style scoped>
 header {
-  position: fixed;
+  position: sticky;
   left: 0;
   right: 0;
   padding-top: 15px;
@@ -148,5 +164,15 @@ button {
 /*    FILTER    */
 /* ------------ */
 .filter-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+.filter-container select {
+  padding: 10px;
+}
+
+.filter-container option {
+  font-size: 15px;
 }
 </style>

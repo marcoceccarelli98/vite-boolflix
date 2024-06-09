@@ -2,8 +2,9 @@ import { reactive } from "vue";
 
 export const store = reactive({
   // DEBUG
-  // debug: true,//turn on debug mode
-  debug: false, //turn off debug mode
+  debug: true, //turn on debug mode
+  // debug: false, //turn off debug mode
+  c: 0,
 
   // API
   loading: false,
@@ -22,6 +23,9 @@ export const store = reactive({
   series: [],
   genres: [],
 
+  filtMovies: [],
+  filtSeries: [],
+
   //HUD
   menu: [
     {
@@ -33,4 +37,14 @@ export const store = reactive({
       isActive: false,
     },
   ],
+
+  // FILTERS
+  filters: {
+    filterOn: false,
+    // GENRES
+    genre: {
+      filterId: 0,
+      hideShow: false,
+    },
+  },
 });
