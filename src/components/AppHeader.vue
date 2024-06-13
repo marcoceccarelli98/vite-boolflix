@@ -19,11 +19,11 @@ export default {
       store.menu.forEach((item, i) => {
         if (index === i) {
           item.isActive = true;
-          store.toggleSearch = 1;
+          store.toggleSearch = "movie";
           console.log(store.toggleSearch);
         } else {
           item.isActive = false;
-          store.toggleSearch = 0;
+          store.toggleSearch = "series";
           console.log(store.toggleSearch);
         }
       });

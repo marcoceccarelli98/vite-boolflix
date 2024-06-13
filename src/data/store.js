@@ -14,7 +14,7 @@ export const store = reactive({
   apiSearchSeries: "/search/tv",
   apiInfoMovie: "/movie/",
   apiInfoSeries: "/tv/",
-  toggleSearch: 1,
+  toggleSearch: "movie",
 
   // INPUTS
   inputSearch: "",
