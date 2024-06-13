@@ -45,10 +45,12 @@ export default {
   <div class="card-container">
     <!-- POSTER -->
     <img
+      v-if="poster != null"
       class="poster-image"
       :src="'https://image.tmdb.org/t/p/w342' + poster"
       :alt="title + ' poster'"
     />
+    <div class="noImage" v-else>IMAGE NOT FOUND</div>
     <!-- DETAILS -->
     <ul class="details">
       <!-- TITLE -->
@@ -106,39 +108,39 @@ export default {
   background-color: black;
   color: white;
   overflow-y: hidden;
+  // HOVER EFFECT
+  &:hover {
+    .poster-image,
+    .noImage {
+      display: none;
+    }
+    .details {
+      display: inline-block;
+    }
+  }
 }
 
 .poster-image {
   width: 342px;
   height: 512px;
 }
+
 // TEXT DETAILS
 .details {
   color: white;
   padding: 30px;
   display: none;
-}
-
-.details .text-list {
-  line-height: 20px;
-}
-
-.details .text-list li:first-of-type {
-  margin-top: 5px;
+  .text-list {
+    line-height: 20px;
+    li:first-of-type {
+      margin-top: 5px;
+    }
+  }
 }
 
 // Language Flag
 .flag {
   width: 30px;
   margin-left: 10px;
-}
-
-// HOVER EFFECT
-.card-container:hover img.poster-image {
-  display: none;
-}
-
-.card-container:hover .details {
-  display: inline-block;
 }
 </style>

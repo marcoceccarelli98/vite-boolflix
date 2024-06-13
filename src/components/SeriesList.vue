@@ -5,11 +5,14 @@ export default {
   components: {
     AppCard,
   },
+
   props: {
     series: {
       type: Array,
     },
   },
+
+  methods: {},
 };
 </script>
 

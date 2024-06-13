@@ -5,16 +5,14 @@ export default {
   components: {
     AppCard,
   },
+
   props: {
     movies: {
       type: Array,
     },
   },
-  methods: {},
 
-  // created() {
-  //   checkFilter();
-  // },
+  methods: {},
 };
 </script>
 

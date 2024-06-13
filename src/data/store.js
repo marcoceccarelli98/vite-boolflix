@@ -21,7 +21,8 @@ export const store = reactive({
   // DATA
   movies: [],
   series: [],
-  genres: [],
+  moviesGenres: [],
+  seriesGenres: [],
 
   filtMovies: [],
   filtSeries: [],
