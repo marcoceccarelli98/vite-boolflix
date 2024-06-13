@@ -18,13 +18,23 @@ export default {
   created() {
     this.getMovieGenres();
     this.getSeriesGenres();
+    this.$watch("store.inputSearch", () => this.searchItems());
+    this.$watch("store.toggleSearch", () => this.searchItems());
   },
+
+  // watch: {
+  //   async (store.inputSearch) {
+  //     if (newQuery) {
+  //       await this.searchItems();
+  //     }
+  //   },
+  // },
 
   methods: {
     // DEBUG
     testLog() {
-      console.log(store.movies);
-      // console.log(store.series);
+      console.log("MOVIES :" + store.movies);
+      console.log("SERIES :" + store.series);
       // console.log(store.genres);
       // console.log(store.filters.filterOn);
       // console.log(store.moviesGenres);
@@ -70,11 +80,14 @@ export default {
     // --------
     //  SEARCH
     // --------
-    searchItems() {
-      // GET MOVIES
-      this.apiSearchMovies();
-      // GET SERIES
-      this.apiSearchSeries();
+    async searchItems() {
+      if (store.menu[0].isActive) {
+        // GET MOVIES
+        await this.apiSearchMovies();
+      } else {
+        // GET SERIES
+        await this.apiSearchSeries();
+      }
     },
 
     async apiSearchMovies() {
@@ -150,6 +163,7 @@ export default {
 
     async apiSearchSeries() {
       store.loading = true;
+      console.log("LOOOOOOOOOOOOOOOOOL");
       try {
         const response = await axios.get(store.apiUrl + store.apiSearchSeries, {
           params: {
@@ -201,7 +215,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @test="testLog()" @search="apiSearchMovies" />
+  <AppHeader @test="testLog()" @search="searchItems" />
   <AppMain />
 </template>
 
