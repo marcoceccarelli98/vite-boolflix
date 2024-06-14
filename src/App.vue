@@ -21,8 +21,7 @@ export default {
   created() {
     this.getMovieGenres();
     this.getSeriesGenres();
-    //this.$watch("store.inputSearch", () => this.searchItems());
-    this.$watch("store.toggleSearch", () => this.searchItems());
+    // this.$watch("store.toggleSearch", () => this.searchItems());
   },
 
   // watch: {
@@ -41,7 +40,7 @@ export default {
       // Imposta un nuovo timeout che chiama receiveSignal dopo 1 secondo
       this.timeout = setTimeout(() => {
         this.searchItems();
-      }, 200);
+      }, 250);
     },
 
     // DEBUG

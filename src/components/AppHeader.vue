@@ -15,11 +15,9 @@ export default {
       store.menu.forEach((item, i) => {
         if (index === i) {
           item.isActive = true;
-          store.toggleSearch = "movie";
           console.log(store.toggleSearch);
         } else {
           item.isActive = false;
-          store.toggleSearch = "series";
           console.log(store.toggleSearch);
         }
       });
@@ -70,7 +68,7 @@ export default {
           <a
             v-for="(item, index) in store.menu"
             :class="{ active: item.isActive }"
-            @click.prevent="setActive(index)"
+            @click.prevent="setActive(index), $emit('search')"
             >{{ item.name }}</a
           >
         </nav>
