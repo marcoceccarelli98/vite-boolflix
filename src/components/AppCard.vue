@@ -26,13 +26,14 @@ export default {
       type: Number,
       required: true,
     },
-    credits: {
+    info: {
       type: Object,
       required: false,
     },
-    genres: {
-      type: Array,
-      required: false,
+    data() {
+      return {
+        showImage: true,
+      };
     },
   },
 
@@ -44,13 +45,15 @@ export default {
 <template>
   <div class="card-container">
     <!-- POSTER -->
-    <img
-      v-if="poster != null"
-      class="poster-image"
-      :src="'https://image.tmdb.org/t/p/w342' + poster"
-      :alt="title + ' poster'"
-    />
-    <div class="noImage" v-else>IMAGE NOT FOUND</div>
+    <div class="image-content">
+      <img
+        v-if="poster != null || this.showImage"
+        class="poster-image"
+        :src="'https://image.tmdb.org/t/p/w342' + poster"
+        :alt="title + ' poster'"
+      />
+      <div class="noImage" v-else>IMAGE NOT FOUND</div>
+    </div>
     <!-- DETAILS -->
     <ul class="details">
       <!-- TITLE -->
@@ -77,20 +80,20 @@ export default {
       <li class="mb-15"><StarsVote :vote="vote" /></li>
       <!-- /VOTE -->
       <!-- CAST -->
-      <li class="text-list mb-15" v-if="credits">
-        <ul v-show="credits.length > 0">
+      <li class="text-list mb-15" v-if="info.credits.cast">
+        <ul v-show="info.credits.cast.length > 0">
           Cast:
-          <li v-for="actor in credits.cast.slice(0, 5)">
+          <li v-for="actor in info.credits.cast.slice(0, 5)">
             {{ actor.name }}
           </li>
         </ul>
       </li>
       <!-- /CAST -->
       <!-- GENRES -->
-      <li class="text-list mb-15" v-if="genres">
-        <ul v-show="genres.length > 0">
+      <li class="text-list mb-15" v-if="info.genres">
+        <ul v-show="info.genres.length > 0">
           Genres:
-          <li v-for="genre in genres">
+          <li v-for="genre in info.genres">
             {{ genre.name }}
           </li>
         </ul>
@@ -112,24 +115,35 @@ export default {
   &:hover {
     .poster-image,
     .noImage {
-      display: none;
+      // display: none;
+      opacity: 0;
+      max-height: 0;
+      transition: 0.5s;
     }
     .details {
+      opacity: 1;
+      max-height: 600px;
+      transition: 0.3s;
       display: inline-block;
     }
   }
 }
 
-.poster-image {
-  width: 342px;
-  height: 512px;
+.image-content {
+  transition: opacity 0.3s, max-height 0.3s;
+  overflow: hidden;
+  .poster-image {
+    position: relative;
+    width: 342px;
+    height: 512px;
+  }
 }
 
 // TEXT DETAILS
 .details {
   color: white;
   padding: 30px;
-  display: none;
+  //display: none;
   .text-list {
     line-height: 20px;
     li:first-of-type {

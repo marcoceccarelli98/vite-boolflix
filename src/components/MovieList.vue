@@ -25,8 +25,7 @@ export default {
       :originalTitle="movie.original_title"
       :language="movie.original_language"
       :vote="movie.vote_average"
-      :credits="movie.credits"
-      :genres="movie.genres"
+      :info="movie.info"
     />
   </div>
 </template>

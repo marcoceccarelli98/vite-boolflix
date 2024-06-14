@@ -33,8 +33,8 @@ export default {
   methods: {
     // DEBUG
     testLog() {
-      console.log("MOVIES :" + store.movies);
-      console.log("SERIES :" + store.series.info);
+      console.log(store.movies);
+      console.log(store.series);
       // console.log(store.genres);
       // console.log(store.filters.filterOn);
       // console.log(store.moviesGenres);
