@@ -10,10 +10,6 @@ export default {
     };
   },
 
-  // mounted() {
-  //   this.checkUseFilter();
-  // },
-
   methods: {
     setActive(index) {
       store.menu.forEach((item, i) => {
@@ -32,16 +28,6 @@ export default {
     toggleFilter() {
       this.showFilter = !this.showFilter;
     },
-
-    // checkFilter(item) {
-    //   // GENRE
-    //   if (item.genre_ids.includes(store.filters.genre.filterId)) {
-    //     console.log("item : " + item.title);
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
 
     checkUseFilter() {
       // store.filtSeries=[];
@@ -102,6 +88,7 @@ export default {
         <!-- INPUT -->
         <input
           @keyup.enter="$emit('search')"
+          @keydown="$emit('searchKeyDown')"
           type="text"
           v-model="store.inputSearch"
         />
