@@ -1,20 +1,21 @@
 import { reactive } from "vue";
 
+import { apiInfo } from "../config/api";
+
 export const store = reactive({
   // DEBUG
   debug: true, //turn on debug mode
   // debug: false, //turn off debug mode
-  c: 0,
+
+  // IMPORTED
+  apiInfo,
 
   // API
-  loading: false,
-  apiUrl: "https://api.themoviedb.org/3",
-  apiKey: "b875ad765049fffffbab8ac9601a041f",
   apiLang: "it",
-  apiSearchMovie: "/search/movie",
-  apiSearchSeries: "/search/tv",
   apiInfoMovie: "/movie/",
   apiInfoSeries: "/tv/",
+
+  loading: false,
 
   // INPUTS
   inputSearch: "",

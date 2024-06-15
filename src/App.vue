@@ -57,11 +57,15 @@ export default {
     // ------------
     getMovieGenres() {
       store.loading = true;
+      const url =
+        store.apiInfo.baseUrl +
+        store.apiInfo.endpoints.moviesGenre +
+        "?api_key=" +
+        store.apiInfo.key;
       axios
-        .get("https://api.themoviedb.org/3/genre/movie/list", {
+        .get(url, {
           params: {
             api_key: store.apiKey,
-            language: store.apiLang,
           },
         })
         .then((response) => {
@@ -75,11 +79,15 @@ export default {
 
     getSeriesGenres() {
       store.loading = true;
+      const url =
+        store.apiInfo.baseUrl +
+        store.apiInfo.endpoints.seriesGenre +
+        "?api_key=" +
+        store.apiInfo.key;
       axios
-        .get("https://api.themoviedb.org/3/genre/tv/list", {
+        .get(url, {
           params: {
             api_key: store.apiKey,
-            language: store.apiLang,
           },
         })
         .then((response) => {
@@ -107,10 +115,18 @@ export default {
     // ------------------------ SEARCH MOVIES ------------------------
 
     async apiSearchMovies() {
+      // START LOADING
       store.loading = true;
+      // GET URL
+      const url =
+        store.apiInfo.baseUrl +
+        store.apiInfo.endpoints.searchMovies +
+        "?api_key=" +
+        store.apiInfo.key;
+
       try {
-        // Prima chiamata per cercare i film
-        const response = await axios.get(store.apiUrl + store.apiSearchMovie, {
+        // First call get films
+        const response = await axios.get(url, {
           params: {
             api_key: store.apiKey,
             query: store.inputSearch,
@@ -122,6 +138,7 @@ export default {
         store.movies = response.data.results;
         // console.log("1: " + store.movies);
         // Array of promises for info call
+
         const infoPromises = store.movies.map((movie) =>
           axios
             .get(store.apiUrl + "/movie/" + movie.id, {
