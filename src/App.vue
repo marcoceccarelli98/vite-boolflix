@@ -61,6 +61,7 @@ export default {
         .get("https://api.themoviedb.org/3/genre/movie/list", {
           params: {
             api_key: store.apiKey,
+            language: store.apiLang,
           },
         })
         .then((response) => {
@@ -78,6 +79,7 @@ export default {
         .get("https://api.themoviedb.org/3/genre/tv/list", {
           params: {
             api_key: store.apiKey,
+            language: store.apiLang,
           },
         })
         .then((response) => {
@@ -112,6 +114,7 @@ export default {
           params: {
             api_key: store.apiKey,
             query: store.inputSearch,
+            language: store.apiLang,
           },
         });
 
@@ -124,6 +127,7 @@ export default {
             .get(store.apiUrl + "/movie/" + movie.id, {
               params: {
                 api_key: store.apiKey,
+                language: store.apiLang,
                 append_to_response: "credits",
               },
             })
@@ -157,6 +161,7 @@ export default {
         const response = await axios.get(store.apiUrl + store.apiSearchSeries, {
           params: {
             api_key: store.apiKey,
+            language: store.apiLang,
             query: store.inputSearch,
           },
         });
@@ -169,6 +174,7 @@ export default {
             .get(store.apiUrl + "/tv/" + serie.id, {
               params: {
                 api_key: store.apiKey,
+                language: store.apiLang,
                 append_to_response: "credits",
               },
             })
