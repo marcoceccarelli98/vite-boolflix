@@ -7,7 +7,7 @@ export default {
   },
   props: {
     poster: {
-      type: String,
+      type: [String, null],
       required: true,
     },
     title: {
@@ -47,7 +47,7 @@ export default {
     <!-- POSTER -->
     <div class="image-content">
       <img
-        v-if="poster != null || this.showImage"
+        v-if="poster"
         class="poster-image"
         :src="'https://image.tmdb.org/t/p/w342' + poster"
         :alt="title + ' poster'"

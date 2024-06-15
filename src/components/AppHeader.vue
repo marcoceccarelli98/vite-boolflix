@@ -2,7 +2,7 @@
 import { store } from "../data/store.js";
 export default {
   name: "AppHeader",
-  emits: ["search", "test"],
+  emits: ["search", "test", "searchKeyDown"],
   data() {
     return {
       store,
