@@ -1,3 +1,4 @@
+// API
 export const apiInfo = {
   key: "b875ad765049fffffbab8ac9601a041f",
   baseUrl: "https://api.themoviedb.org/3",
@@ -6,5 +7,8 @@ export const apiInfo = {
     searchSeries: "/search/tv",
     moviesGenre: "/genre/movie/list",
     seriesGenre: "/genre/movie/list",
+    infoMovie: "/movie/",
+    infoSeries: "/tv/",
+    lang: "it-IT",
   },
 };

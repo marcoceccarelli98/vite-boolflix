@@ -118,11 +118,7 @@ export default {
       // START LOADING
       store.loading = true;
       // GET URL
-      const url =
-        store.apiInfo.baseUrl +
-        store.apiInfo.endpoints.searchMovies +
-        "?api_key=" +
-        store.apiInfo.key;
+      const url = store.apiInfo.baseUrl + store.apiInfo.endpoints.searchMovies;
       console.log(url);
       try {
         // First call get films
@@ -130,7 +126,7 @@ export default {
           params: {
             api_key: store.apiInfo.key,
             query: store.inputSearch,
-            language: store.apiLang,
+            language: store.apiInfo.endpoints.lang,
           },
         });
         // Save results in store
@@ -138,12 +134,15 @@ export default {
 
         // Array of promises for info call
         const infoPromises = store.movies.map(async (movie) => {
-          const url = store.apiInfo.baseUrl + "/movie/" + movie.id;
+          const url =
+            store.apiInfo.baseUrl +
+            store.apiInfo.endpoints.infoMovie +
+            movie.id;
           try {
             const response = await axios.get(url, {
               params: {
                 api_key: store.apiInfo.key,
-                language: store.apiLang,
+                language: store.apiInfo.endpoints.lang,
                 append_to_response: "credits",
               },
             });
@@ -173,9 +172,7 @@ export default {
       // START LOADING
       store.loading = true;
       // GET URL
-      const url = store.apiInfo.baseUrl + store.apiInfo.endpoints.searchSeries; //+
-      // "?api_key=" +
-      // store.apiInfo.key;
+      const url = store.apiInfo.baseUrl + store.apiInfo.endpoints.searchSeries;
       console.log(url);
       try {
         // First call get films
@@ -183,7 +180,7 @@ export default {
           params: {
             api_key: store.apiInfo.key,
             query: store.inputSearch,
-            language: store.apiLang,
+            language: store.apiInfo.endpoints.lang,
           },
         });
         // Save results in store
@@ -191,12 +188,15 @@ export default {
 
         // Array of promises for info call
         const infoPromises = store.series.map(async (serie) => {
-          const url = store.apiInfo.baseUrl + "/tv/" + serie.id;
+          const url =
+            store.apiInfo.baseUrl +
+            store.apiInfo.endpoints.infoSeries +
+            serie.id;
           try {
             const response = await axios.get(url, {
               params: {
                 api_key: store.apiInfo.key,
-                language: store.apiLang,
+                language: store.apiInfo.endpoints.lang,
                 append_to_response: "credits",
               },
             });

@@ -10,11 +10,6 @@ export const store = reactive({
   // IMPORTED
   apiInfo,
 
-  // API
-  apiLang: "it",
-  apiInfoMovie: "/movie/",
-  apiInfoSeries: "/tv/",
-
   loading: false,
 
   // INPUTS
@@ -33,11 +28,11 @@ export const store = reactive({
   menu: [
     {
       name: "Movies",
-      isActive: 0,
+      isActive: 1,
     },
     {
       name: "Series",
-      isActive: 1,
+      isActive: 0,
     },
   ],
 
