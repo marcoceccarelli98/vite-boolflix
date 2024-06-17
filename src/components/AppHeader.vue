@@ -15,10 +15,9 @@ export default {
       store.menu.forEach((item, i) => {
         if (index === i) {
           item.isActive = true;
-          console.log(store.toggleSearch);
+          console.log(i == 0 ? "Movies" : "Series");
         } else {
           item.isActive = false;
-          console.log(store.toggleSearch);
         }
       });
     },

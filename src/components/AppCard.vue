@@ -80,7 +80,7 @@ export default {
       <li class="mb-15"><StarsVote :vote="vote" /></li>
       <!-- /VOTE -->
       <!-- CAST -->
-      <li class="text-list mb-15" v-if="info.credits.cast">
+      <li class="text-list mb-15" v-if="info">
         <ul v-show="info.credits.cast.length > 0">
           Cast:
           <li v-for="actor in info.credits.cast.slice(0, 5)">
@@ -90,7 +90,7 @@ export default {
       </li>
       <!-- /CAST -->
       <!-- GENRES -->
-      <li class="text-list mb-15" v-if="info.genres">
+      <li class="text-list mb-15" v-if="info">
         <ul v-show="info.genres.length > 0">
           Genres:
           <li v-for="genre in info.genres">

@@ -65,7 +65,7 @@ export default {
       axios
         .get(url, {
           params: {
-            api_key: store.apiKey,
+            api_key: store.apiInfo.key,
           },
         })
         .then((response) => {
@@ -87,7 +87,7 @@ export default {
       axios
         .get(url, {
           params: {
-            api_key: store.apiKey,
+            api_key: store.apiInfo.key,
           },
         })
         .then((response) => {
@@ -123,44 +123,41 @@ export default {
         store.apiInfo.endpoints.searchMovies +
         "?api_key=" +
         store.apiInfo.key;
-
+      console.log(url);
       try {
         // First call get films
         const response = await axios.get(url, {
           params: {
-            api_key: store.apiKey,
+            api_key: store.apiInfo.key,
             query: store.inputSearch,
             language: store.apiLang,
           },
         });
-
         // Save results in store
         store.movies = response.data.results;
-        // console.log("1: " + store.movies);
-        // Array of promises for info call
 
-        const infoPromises = store.movies.map((movie) =>
-          axios
-            .get(store.apiUrl + "/movie/" + movie.id, {
+        // Array of promises for info call
+        const infoPromises = store.movies.map(async (movie) => {
+          const url = store.apiInfo.baseUrl + "/movie/" + movie.id;
+          try {
+            const response = await axios.get(url, {
               params: {
-                api_key: store.apiKey,
+                api_key: store.apiInfo.key,
                 language: store.apiLang,
                 append_to_response: "credits",
               },
-            })
-            .then((response) => {
-              movie.info = {
-                credits: response.data.credits,
-                genres: response.data.genres,
-              };
-            })
-            .catch((movieInfoError) => {
-              console.log(
-                `Error fetching details for movie ID ${movie.id}:`,
-                movieInfoError
-              );
-            })
-        );
+            });
+            movie.info = {
+              credits: response.data.credits,
+              genres: response.data.genres,
+            };
+          } catch (movieInfoError) {
+            console.log(
+              `Error fetching details for movie ID ${movie.id}:`,
+              movieInfoError
+            );
+          }
+        });
         // Wait untill all Promise resolved
         await Promise.all(infoPromises);
       } catch (error) {
@@ -173,49 +170,108 @@ export default {
     // ------------------------ SEARCH SERIES ------------------------
 
     async apiSearchSeries() {
+      // START LOADING
       store.loading = true;
+      // GET URL
+      const url = store.apiInfo.baseUrl + store.apiInfo.endpoints.searchSeries; //+
+      // "?api_key=" +
+      // store.apiInfo.key;
+      console.log(url);
       try {
-        const response = await axios.get(store.apiUrl + store.apiSearchSeries, {
+        // First call get films
+        const response = await axios.get(url, {
           params: {
-            api_key: store.apiKey,
-            language: store.apiLang,
+            api_key: store.apiInfo.key,
             query: store.inputSearch,
+            language: store.apiLang,
           },
         });
-
+        // Save results in store
         store.series = response.data.results;
 
         // Array of promises for info call
-        const infoPromises = store.series.map((serie) =>
-          axios
-            .get(store.apiUrl + "/tv/" + serie.id, {
+        const infoPromises = store.series.map(async (serie) => {
+          const url = store.apiInfo.baseUrl + "/tv/" + serie.id;
+          try {
+            const response = await axios.get(url, {
               params: {
-                api_key: store.apiKey,
+                api_key: store.apiInfo.key,
                 language: store.apiLang,
                 append_to_response: "credits",
               },
-            })
-            .then((response) => {
-              serie.info = {
-                credits: response.data.credits,
-                genres: response.data.genres,
-              };
-            })
-            .catch((seriesInfoError) => {
-              console.log(
-                `Error fetching details for serie ID ${serie.id}:`,
-                seriesInfoError
-              );
-            })
-        );
+            });
+            serie.info = {
+              credits: response.data.credits,
+              genres: response.data.genres,
+            };
+          } catch (serieInfoError) {
+            console.log(
+              `Error fetching details for serie ID ${serie.id}:`,
+              serieInfoError
+            );
+          }
+        });
         // Wait untill all Promise resolved
         await Promise.all(infoPromises);
       } catch (error) {
-        console.log("Search Series ERROR : ", error);
+        console.log("Search serie ERROR:", error);
       } finally {
         store.loading = false;
       }
     },
+
+    // async apiSearchSeries() {
+    //   // START LOADING
+    //   store.loading = true;
+    //   // GET URL
+    //   const url =
+    //     store.apiInfo.baseUrl +
+    //     store.apiInfo.endpoints.searchSeries +
+    //     "?api_key=" +
+    //     store.apiInfo.key;
+    //   console.log(url);
+    //   try {
+    //     // First call get films
+    //     const response = await axios.get(url, {
+    //       params: {
+    //         api_key: store.apiInfo.key,
+    //         query: store.inputSearch,
+    //         language: store.apiLang,
+    //       },
+    //     });
+    //     // Save results in store
+    //     store.series = response.data.results;
+
+    //     // Array of promises for info call
+    //     const infoPromises = store.series.map(async (serie) => {
+    //       const url = store.apiInfo.baseUrl + "/serie/" + serie.id;
+    //       try {
+    //         const response = await axios.get(url, {
+    //           params: {
+    //             api_key: store.apiInfo.key,
+    //             language: store.apiLang,
+    //             append_to_response: "credits",
+    //           },
+    //         });
+    //         serie.info = {
+    //           credits: response.data.credits,
+    //           genres: response.data.genres,
+    //         };
+    //       } catch (serieInfoError) {
+    //         console.log(
+    //           `Error fetching details for serie ID ${serie.id}:`,
+    //           serieInfoError
+    //         );
+    //       }
+    //     });
+    //     // Wait untill all Promise resolved
+    //     await Promise.all(infoPromises);
+    //   } catch (error) {
+    //     console.log("Search Series ERROR : ", error);
+    //   } finally {
+    //     store.loading = false;
+    //   }
+    // },
   },
 };
 </script>

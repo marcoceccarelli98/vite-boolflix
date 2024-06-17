@@ -3,7 +3,7 @@ export const apiInfo = {
   baseUrl: "https://api.themoviedb.org/3",
   endpoints: {
     searchMovies: "/search/movie",
-    seriesSeries: "/search/tv",
+    searchSeries: "/search/tv",
     moviesGenre: "/genre/movie/list",
     seriesGenre: "/genre/movie/list",
   },

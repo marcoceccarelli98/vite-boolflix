@@ -33,11 +33,11 @@ export const store = reactive({
   menu: [
     {
       name: "Movies",
-      isActive: 1,
+      isActive: 0,
     },
     {
       name: "Series",
-      isActive: 0,
+      isActive: 1,
     },
   ],
 
