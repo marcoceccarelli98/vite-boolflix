@@ -45,11 +45,18 @@ export default {
 
     // DEBUG
     testLog() {
-      // console.log(store.movies);
-      // console.log(store.series);
-      console.log(store.moviesGenres);
-      console.log(store.seriesGenres);
+      console.log(store.movies);
+      console.log(store.series);
+      // console.log(store.moviesGenres);
+      // console.log(store.seriesGenres);
       // console.log(store.filters.filterOn);
+    },
+
+    // --------------
+    //  GET HOMEPAGE
+    // --------------
+    async getPopularMovies() {
+      //   *TODO
     },
 
     // ------------
@@ -98,7 +105,7 @@ export default {
       if (store.menu[0].isActive) {
         // GET MOVIES
         await this.apiSearchMovies();
-      } else {
+      } else if (store.menu[1].isActive) {
         // GET SERIES
         await this.apiSearchSeries();
       }
@@ -211,59 +218,6 @@ export default {
         store.loading = false;
       }
     },
-
-    // async apiSearchSeries() {
-    //   // START LOADING
-    //   store.loading = true;
-    //   // GET URL
-    //   const url =
-    //     store.apiInfo.baseUrl +
-    //     store.apiInfo.endpoints.searchSeries +
-    //     "?api_key=" +
-    //     store.apiInfo.key;
-    //   console.log(url);
-    //   try {
-    //     // First call get films
-    //     const response = await axios.get(url, {
-    //       params: {
-    //         api_key: store.apiInfo.key,
-    //         query: store.inputSearch,
-    //         language: store.apiLang,
-    //       },
-    //     });
-    //     // Save results in store
-    //     store.series = response.data.results;
-
-    //     // Array of promises for info call
-    //     const infoPromises = store.series.map(async (serie) => {
-    //       const url = store.apiInfo.baseUrl + "/serie/" + serie.id;
-    //       try {
-    //         const response = await axios.get(url, {
-    //           params: {
-    //             api_key: store.apiInfo.key,
-    //             language: store.apiLang,
-    //             append_to_response: "credits",
-    //           },
-    //         });
-    //         serie.info = {
-    //           credits: response.data.credits,
-    //           genres: response.data.genres,
-    //         };
-    //       } catch (serieInfoError) {
-    //         console.log(
-    //           `Error fetching details for serie ID ${serie.id}:`,
-    //           serieInfoError
-    //         );
-    //       }
-    //     });
-    //     // Wait untill all Promise resolved
-    //     await Promise.all(infoPromises);
-    //   } catch (error) {
-    //     console.log("Search Series ERROR : ", error);
-    //   } finally {
-    //     store.loading = false;
-    //   }
-    // },
   },
 };
 </script>

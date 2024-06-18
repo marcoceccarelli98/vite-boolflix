@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       store,
-      showFilter: true,
+      showFilter: false,
     };
   },
 
@@ -15,7 +15,6 @@ export default {
       store.menu.forEach((item, i) => {
         if (index === i) {
           item.isActive = true;
-          console.log(i == 0 ? "Movies" : "Series");
         } else {
           item.isActive = false;
         }
@@ -113,7 +112,7 @@ header {
   position: sticky;
   left: 0;
   right: 0;
-  padding-top: 15px;
+  padding: 15px 0;
   justify-content: space-between;
   background-color: black;
   //height: 80px;

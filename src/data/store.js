@@ -27,8 +27,12 @@ export const store = reactive({
   //HUD
   menu: [
     {
-      name: "Movies",
+      name: "Home",
       isActive: 1,
+    },
+    {
+      name: "Movies",
+      isActive: 0,
     },
     {
       name: "Series",
