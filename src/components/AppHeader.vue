@@ -78,34 +78,37 @@ export default {
     </div>
     <!-- FILTER -->
     <div v-show="this.showFilter" class="filter-container">
-      <select
-        @change="checkFilterOn"
-        v-model="store.filters.genre.filterId"
-        name="genreFilter"
-      >
-        <option value="0">None</option>
-        <!-- MOVIE GENRES OPTION -->
-        <option
-          v-if="store.menu[0].isActive"
-          v-for="genre in store.moviesGenres"
-          :value="genre.id"
+      <div class="genre">
+        <label for="genreFilter">Genres</label>
+        <select
+          @change="checkFilterOn"
+          v-model="store.filters.genre.filterId"
+          name="genreFilter"
         >
-          {{ genre.name }}
-        </option>
-        <!-- MOVIE SERIES OPTION -->
-        <option
-          v-else="store.menu[1].isActive"
-          v-for="genre in store.seriesGenres"
-          :value="genre.id"
-        >
-          {{ genre.name }}
-        </option>
-      </select>
+          <option value="0">None</option>
+          <!-- MOVIE GENRES OPTION -->
+          <option
+            v-if="store.menu[0].isActive"
+            v-for="genre in store.moviesGenres"
+            :value="genre.id"
+          >
+            {{ genre.name }}
+          </option>
+          <!-- MOVIE SERIES OPTION -->
+          <option
+            v-else="store.menu[1].isActive"
+            v-for="genre in store.seriesGenres"
+            :value="genre.id"
+          >
+            {{ genre.name }}
+          </option>
+        </select>
+      </div>
     </div>
   </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 header {
   position: sticky;
   left: 0;
@@ -113,12 +116,11 @@ header {
   padding-top: 15px;
   justify-content: space-between;
   background-color: black;
-  height: 80px;
-}
-
-header.showFilter {
-  display: block;
-  height: 200px;
+  //height: 80px;
+  &.showFilter {
+    display: block;
+    height: 200px;
+  }
 }
 
 .left-content {
@@ -137,15 +139,14 @@ nav {
   margin-left: 50px;
   display: flex;
   align-items: center;
-}
-
-nav a {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  color: rgb(230, 230, 230);
-  margin-right: 10px;
-  margin-left: 10px;
-  font-size: 15px;
+  a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: rgb(230, 230, 230);
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 15px;
+  }
 }
 
 .active {
@@ -181,15 +182,20 @@ button {
 /*    FILTER    */
 /* ------------ */
 .filter-container {
+  height: 140px;
   display: flex;
   justify-content: center;
-  margin-top: 40px;
-}
-.filter-container select {
-  padding: 10px;
-}
-
-.filter-container option {
-  font-size: 15px;
+  align-items: center;
+  select {
+    padding: 10px;
+  }
+  option {
+    font-size: 15px;
+  }
+  label {
+    display: block;
+    color: white;
+    padding: 2px 10px;
+  }
 }
 </style>
