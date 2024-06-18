@@ -15,23 +15,7 @@ export default {
       filteredMovies: [],
     };
   },
-  methods: {
-    // checkFilter(item) {
-    //   // GENRE
-    //   if (item.genres.includes(store.filters.genre.filterId)) {
-    //     console.log("item : " + item.title);
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
-    // filtMovies() {
-    //   if (store.filters.genre.filterId !== 0 && store.menu[0].isActive) {
-    //     return store.movies.filter((movie) => this.checkFilter(movie));
-    //   }
-    //   return store.movies;
-    // },
-  },
+  methods: {},
 
   computed: {
     filtMovies() {

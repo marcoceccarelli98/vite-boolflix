@@ -24,30 +24,13 @@ export default {
 
     toggleFilter() {
       this.showFilter = !this.showFilter;
+      this.checkFilterOn();
     },
 
-    checkUseFilter() {
-      // store.filtSeries=[];
-      // Check in there is any filter
-      if (store.filters.genre.filterId != 0) {
+    checkFilterOn() {
+      if (this.showFilter && store.filters.genre.filterId > 0) {
         store.filters.filterOn = true;
-
-        // if (store.menu[0].isActive) {
-        //   store.filtMovies = [];
-
-        //   store.movies.forEach((movie) => {
-        //     // Reset filtered list
-        //     console.log("ELEMENTO: " + movie);
-        //     // Set new fil filtered list
-        //     if (this.checkFilter(movie)) {
-        //       store.filtMovies.push(movie);
-        //       console.log("TROVATO");
-        //     }
-        //   });
-        // }
       } else {
-        //console.log("NO FILTER");
-        //store.filtMovies = store.movies;
         store.filters.filterOn = false;
       }
     },
@@ -96,7 +79,7 @@ export default {
     <!-- FILTER -->
     <div v-show="this.showFilter" class="filter-container">
       <select
-        @change="checkUseFilter"
+        @change="checkFilterOn"
         v-model="store.filters.genre.filterId"
         name="genreFilter"
       >
