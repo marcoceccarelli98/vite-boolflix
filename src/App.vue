@@ -45,11 +45,11 @@ export default {
 
     // DEBUG
     testLog() {
-      console.log(store.movies);
-      console.log(store.series);
-      // console.log(store.genres);
+      // console.log(store.movies);
+      // console.log(store.series);
+      console.log(store.moviesGenres);
+      console.log(store.seriesGenres);
       // console.log(store.filters.filterOn);
-      // console.log(store.moviesGenres);
     },
 
     // ------------
@@ -57,11 +57,7 @@ export default {
     // ------------
     getMovieGenres() {
       store.loading = true;
-      const url =
-        store.apiInfo.baseUrl +
-        store.apiInfo.endpoints.moviesGenre +
-        "?api_key=" +
-        store.apiInfo.key;
+      const url = store.apiInfo.baseUrl + store.apiInfo.endpoints.moviesGenre;
       axios
         .get(url, {
           params: {
@@ -79,11 +75,7 @@ export default {
 
     getSeriesGenres() {
       store.loading = true;
-      const url =
-        store.apiInfo.baseUrl +
-        store.apiInfo.endpoints.seriesGenre +
-        "?api_key=" +
-        store.apiInfo.key;
+      const url = store.apiInfo.baseUrl + store.apiInfo.endpoints.seriesGenre;
       axios
         .get(url, {
           params: {
