@@ -111,6 +111,37 @@ export default {
       }
     },
 
+    getInfo(array) {
+      const infoPromises = array.map(async (item) => {
+        let endpoint;
+        if ("title" in item) {
+          endpoint = store.apiInfo.endpoints.infoMovie;
+        } else {
+          endpoint = store.apiInfo.endpoints.infoSeries;
+        }
+        const url = store.apiInfo.baseUrl + endpoint + item.id;
+        try {
+          const response = await axios.get(url, {
+            params: {
+              api_key: store.apiInfo.key,
+              language: store.apiInfo.endpoints.lang,
+              append_to_response: "credits",
+            },
+          });
+          item.info = {
+            credits: response.data.credits,
+            genres: response.data.genres,
+          };
+        } catch (itemInfoError) {
+          console.log(
+            `Error fetching details for item ID ${item.id}:`,
+            itemInfoError
+          );
+        }
+      });
+      return infoPromises;
+    },
+
     // ------------------------ SEARCH MOVIES ------------------------
 
     async apiSearchMovies() {
@@ -132,30 +163,9 @@ export default {
         store.movies = response.data.results;
 
         // Array of promises for info call
-        const infoPromises = store.movies.map(async (movie) => {
-          const url =
-            store.apiInfo.baseUrl +
-            store.apiInfo.endpoints.infoMovie +
-            movie.id;
-          try {
-            const response = await axios.get(url, {
-              params: {
-                api_key: store.apiInfo.key,
-                language: store.apiInfo.endpoints.lang,
-                append_to_response: "credits",
-              },
-            });
-            movie.info = {
-              credits: response.data.credits,
-              genres: response.data.genres,
-            };
-          } catch (movieInfoError) {
-            console.log(
-              `Error fetching details for movie ID ${movie.id}:`,
-              movieInfoError
-            );
-          }
-        });
+
+        const infoPromises = this.getInfo(store.movies);
+
         // Wait untill all Promise resolved
         await Promise.all(infoPromises);
       } catch (error) {
