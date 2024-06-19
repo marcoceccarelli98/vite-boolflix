@@ -196,30 +196,7 @@ export default {
         store.series = response.data.results;
 
         // Array of promises for info call
-        const infoPromises = store.series.map(async (serie) => {
-          const url =
-            store.apiInfo.baseUrl +
-            store.apiInfo.endpoints.infoSeries +
-            serie.id;
-          try {
-            const response = await axios.get(url, {
-              params: {
-                api_key: store.apiInfo.key,
-                language: store.apiInfo.endpoints.lang,
-                append_to_response: "credits",
-              },
-            });
-            serie.info = {
-              credits: response.data.credits,
-              genres: response.data.genres,
-            };
-          } catch (serieInfoError) {
-            console.log(
-              `Error fetching details for serie ID ${serie.id}:`,
-              serieInfoError
-            );
-          }
-        });
+        const infoPromises = this.getInfo(store.series);
         // Wait untill all Promise resolved
         await Promise.all(infoPromises);
       } catch (error) {
